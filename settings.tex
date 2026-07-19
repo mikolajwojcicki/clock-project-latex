@@ -13,15 +13,20 @@
 \RequirePackage{csquotes} % Wymagane przez biblatex
 
 %%% 2. MATEMATYKA I CZCIONKI
+%%% WIT / Zasady Grebera: Times New Roman 12 pt w całym dokumencie.
+%%% newtx* = nowoczesny klon Times (tekst + matematyka w tej samej rodzinie).
+%%% Wyjątek: listingi/kod — \ttfamily (maszynowa), zgodnie z praktyką techniczną.
 \RequirePackage{amsmath}
 \RequirePackage{mathtools}
 \RequirePackage{amsthm}
 
-\RequirePackage{newtxtext} 
+\RequirePackage{newtxtext}
 \RequirePackage{newtxmath}
 \RequirePackage{microtype} % Poprawia optyczny wygląd tekstu
+\renewcommand{\familydefault}{\rmdefault} % serif wszędzie (bez sffamily na tytule)
 
 %%% 3. GEOMETRIA I GRAFIKA
+%%% wymogi_edytorskie: 25 mm + 5 mm na oprawę (lewa / inner)
 \RequirePackage{geometry}
 \geometry{
   a4paper,
@@ -35,36 +40,54 @@
 
 %%% 4. NARZĘDZIA POMOCNICZE
 \RequirePackage{etoolbox}
+\RequirePackage{indentfirst} % wcięcie także pierwszego akapitu po tytule
 
 %%% 5. FORMATOWANIE TEKSTU I NAGŁÓWKÓW
+%%% wymogi_edytorskie: rozdział 14 pt, podrozdział 13 pt, 2. rząd 12 pt; interlinia 1;
+%%% Zasady Grebera: justowanie, bez kropek po tytułach rozdziałów
 \RequirePackage{titlesec}
 \RequirePackage{caption}
 \RequirePackage{subcaption}
 \RequirePackage{setspace}
 
 \setlength{\parindent}{0.7cm}
-\setstretch{1.15} 
+\singlespacing % wymogi_edytorskie: interlinia pojedyncza (klasa report justuje tekst)
 
-% Formatowanie nagłówków (Rozdział, Podrozdział)
+% Rozmiary WIT (Times / newtx): 14 / 13 / 12 pt
+\newcommand{\WitChapterFont}{\normalfont\bfseries\fontsize{14}{17}\selectfont}
+\newcommand{\WitSectionFont}{\normalfont\bfseries\fontsize{13}{16}\selectfont}
+\newcommand{\WitSubsectionFont}{\normalfont\bfseries\fontsize{12}{14.5}\selectfont}
+
 \titleformat{\chapter}[display]
-  {\bfseries\Large}
-  {\chaptertitlename\ \thechapter}{0.5ex}   
-  {\huge}
+  {\WitChapterFont}
+  {\chaptertitlename\ \thechapter}{0.5ex}
+  {\WitChapterFont}
 \titlespacing*{\chapter}{0pt}{-20pt}{20pt}
 
-\titleformat{\section}{\bfseries\Large}{\thesection.}{1em}{}
+\titleformat{\section}{\WitSectionFont}{\thesection.}{1em}{}
 \titlespacing*{\section}{0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
 
-\titleformat{\subsection}{\bfseries\large}{\thesubsection.}{1em}{}
+\titleformat{\subsection}{\WitSubsectionFont}{\thesubsection.}{1em}{}
 \titlespacing*{\subsection}{0pt}{2.25ex plus 1ex minus .2ex}{1.0ex plus .2ex}
 
-% Numeracja ciągła wewnątrz rozdziałów
+\titleformat{\subsubsection}{\WitSubsectionFont}{\thesubsubsection.}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{2.0ex plus 1ex minus .2ex}{0.8ex plus .2ex}
+
+% Numeracja ciągła wewnątrz rozdziałów (Tabela 2.1 / Rys. 2.1)
 \counterwithin{figure}{chapter}
 \counterwithin{table}{chapter}
 \numberwithin{equation}{chapter}
 
-% Podpisy (Captions) - pogrubione etykiety
-\captionsetup{font=small, labelfont=bf, labelsep=period}
+% Podpisy: 10 pt, ta sama rodzina Times; Greber: „Rys.” / „Tabela”
+\renewcommand{\figurename}{Rys.}
+\renewcommand{\tablename}{Tabela}
+\captionsetup{
+  font={small,rm},
+  labelfont={bf,rm},
+  labelsep=period,
+  justification=centering,
+  skip=10pt
+}
 
 %%% 6. ALGORYTMY I LISTINGI KODU
 \RequirePackage{algorithm}
@@ -123,10 +146,10 @@
 
 \RequirePackage[nameinlink]{cleveref}
 
-% Tłumaczenia dla cleveref
-\crefname{figure}{Rys.}{Rys.}
+% Tłumaczenia dla cleveref (Greber: „rys.” / pełne „tabela”)
+\crefname{figure}{rys.}{rys.}
 \Crefname{figure}{Rysunek}{Rysunki}
-\crefname{table}{Tab.}{Tab.}
+\crefname{table}{tabela}{tabele}
 \Crefname{table}{Tabela}{Tabele}
 \crefname{equation}{równ.}{równ.}
 \Crefname{equation}{Równanie}{Równania}
@@ -145,51 +168,51 @@
 
 \newcommand{\StronaTytulowa}{
   \pagenumbering{roman}
-  \sffamily
-  \begin{titlepage}  
+  \normalfont % ta sama rodzina Times co reszta pracy (bez sffamily)
+  \begin{titlepage}
     \newgeometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
-    
+
     \begin{center}
-      {\huge\bfseries Politechnika Wrocławska \par}
+      {\fontsize{18}{22}\selectfont\bfseries Politechnika Wrocławska \par}
       \vspace{0.4cm}
-      {\Large Wydział Informatyki i Telekomunikacji \par}
+      {\fontsize{14}{17}\selectfont Wydział Informatyki i Telekomunikacji \par}
     \end{center}
-    \par\noindent\rule{\textwidth}{1pt}\par 
-    \vspace{0.5cm} 
-    
-    {\large
+    \par\noindent\rule{\textwidth}{1pt}\par
+    \vspace{0.5cm}
+
+    {\normalsize
     \begin{tabular}{@{}ll}
       Kierunek: & \textbf{\stKierunek\ (\stKodKierunku)} \\
       \ifdefempty{\stSpecjalnosc}{}{Specjalność: & \textbf{\stSpecjalnosc\ (\stKodSpecjalnosci)}}
     \end{tabular}
     }
-    
+
     \vspace*{\fill}
-    
+
     \begin{center}
-      {\huge\bfseries PRACA DYPLOMOWA \par}
-      \vspace{0.3cm}    
-      {\huge \stRodzajPracy \par}
+      {\fontsize{16}{19}\selectfont\bfseries PRACA DYPLOMOWA \par}
+      \vspace{0.3cm}
+      {\fontsize{16}{19}\selectfont\bfseries \stRodzajPracy \par}
       \vspace{2.0cm}
-      {\Large \bfseries \stTytulPL \par} 
+      {\fontsize{14}{17}\selectfont\bfseries \stTytulPL \par}
       \vspace{1cm}
-      {\Large \stAutor \par}
+      {\fontsize{14}{17}\selectfont \stAutor \par}
       \vspace{2cm}
-      {\large Opiekun pracy:\par \textbf{\stOpiekun} \par}
+      {\normalsize Opiekun pracy:\par \textbf{\stOpiekun} \par}
     \end{center}
-    
+
     \vspace*{\fill}
-    
+
     {\raggedright
       \small Słowa kluczowe: \textit{\stSlowaKluczowe}\par
       \vspace{0.5em}
-      \par\noindent\rule{\textwidth}{1pt}\par 
+      \par\noindent\rule{\textwidth}{1pt}\par
     }
-    
+
     \begin{center}
-      \Large Wrocław \stRok
+      \fontsize{14}{17}\selectfont Wrocław \stRok
     \end{center}
-  
+
     \restoregeometry
   \end{titlepage}
   \normalfont
@@ -199,12 +222,12 @@
 \newenvironment{abstracts}{}{\selectlanguage{polish}\clearpage}
 
 \newcommand{\AbstractPL}{
-  \begin{center}{\Large\bfseries Streszczenie \par}\end{center}\vspace{0.5em}
+  \begin{center}{\WitChapterFont Streszczenie \par}\end{center}\vspace{0.5em}
 }
 
 \newcommand{\AbstractENG}{
   \selectlanguage{english}
-  \begin{center}{\Large\bfseries Abstract \par}\end{center}\vspace{0.5em}
+  \begin{center}{\WitChapterFont Abstract \par}\end{center}\vspace{0.5em}
 }
 
 \newcommand{\SpisTresci}{

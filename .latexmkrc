@@ -1,0 +1,4 @@
+# WIT thesis template: pdflatex + biblatex/biber
+$pdf_mode = 1;
+$bibtex_use = 2;
+$pdflatex = 'pdflatex -interaction=nonstopmode -file-line-error %O %S';

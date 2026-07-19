@@ -1,0 +1,286 @@
+# Thesis writing rules for agents
+# Source: Tomasz Greber — „Zasady pisania prac dyplomowych” (wyd. VI, Wrocław 2014)
+# PDF archive: clock-project/temp-resources/Zasady-pisania-prac-dyplomowych.pdf
+#
+# How to use (LLMs / agents):
+#   - Read this file before drafting or editing any thesis prose in this repo.
+#   - Prefer these content/structure/citation rules over improvisation.
+#   - Typography for the deanery archival PDF follows WIT wymogi_edytorskie
+#     (already encoded in settings.tex). Where Greber and WIT disagree on
+#     margins/spacing, keep settings.tex / WIT; keep Greber for writing craft.
+#   - Promotor requirements override this file if they conflict — ask the user.
+
+meta:
+  title: Zasady pisania prac dyplomowych
+  author: dr inż. Tomasz Greber
+  edition: VI
+  year: 2014
+  thesis_type: inzynierska  # this project: stCzyMgr=0
+  language: pl
+  caveat: >
+    Greber is experience-based, not universal. Other promotors may differ.
+    Chapter-2 “organizacja” framing in Greber maps poorly to a hardware/
+    firmware thesis — adapt roles (theory / design-or-context / own work)
+    while keeping the writing and citation discipline.
+
+# ---------------------------------------------------------------------------
+# Document skeleton (end matter order)
+# ---------------------------------------------------------------------------
+document_order:
+  - strona_tytulowa
+  - streszczenie_pl_en
+  - spis_tresci
+  - wstęp
+  - rozdzialy
+  - zakonczenie
+  - literatura
+  - spis_rysunkow   # if any figures
+  - spis_tabel      # if any tables
+  - spis_zalacznikow
+  - zalaczniki
+
+# ---------------------------------------------------------------------------
+# Target lengths (Greber Table 1; 1.5 spacing assumption — treat as guide)
+# ---------------------------------------------------------------------------
+page_targets:
+  magisterska:
+    wstęp: "1-2"
+    rozdzial_1: 25
+    rozdzial_2: 15
+    rozdzial_3: 40
+    zakonczenie: 2
+  inzynierska:
+    wstęp: "1-2"
+    rozdzial_1: 15
+    rozdzial_2: 5
+    rozdzial_3: 40
+    zakonczenie: 2
+  notes:
+    - Chapters must be substantial — a “chapter” is not half a page.
+    - Keep length balance; avoid one chapter of 1 page and another of 15.
+
+# ---------------------------------------------------------------------------
+# Chapter roles (Greber’s general diploma pattern)
+# ---------------------------------------------------------------------------
+chapters:
+  max_numbered_depth: 3  # e.g. 1.1.1 — deeper levels: bold title, no number
+  main_chapters_start_new_page: true
+  no_punctuation_after_chapter_titles: true
+  no_abbreviations_in_chapter_titles: true
+
+  roles:
+    rozdzial_1:
+      purpose: >
+        Theory / introduction to the topic that chapter 3 will develop.
+        Built on a literature review with precise citations.
+      literature_required: true
+    rozdzial_2:
+      greber_purpose: Charakterystyka wybranej organizacji (firm context).
+      this_project_adaptation: >
+        For this engineering thesis, use chapter 2 for project context /
+        requirements / related systems or design constraints — not a
+        corporate “organizacja” profile unless the promotor asks for it.
+      literature: firm/internal docs OK; keep Greber’s “no own research
+        results that belong in ch. 3” spirit.
+    rozdzial_3:
+      purpose: >
+        Author’s own work: results, analysis, measurements, conclusions.
+        Sometimes split into chapters 3 and 4.
+      literature_citations: forbidden  # Greber: no literature cites in ch. 3
+      emphasize_author_contribution: true
+      end_with_author_summary: true
+      structure_hint: from_general_to_specific
+
+# ---------------------------------------------------------------------------
+# Wstęp (introduction)
+# ---------------------------------------------------------------------------
+wstep:
+  typical_length_pages: 1.5
+  must_include:
+    - Hook / motivation linked to the thesis topic
+    - Explicit statement of the thesis goal (cel pracy) and optional theses
+    - Short outline of the work structure (chapter-by-chapter)
+  outline_style_example: |
+    Praca składa się z trzech rozdziałów.
+    W rozdziale pierwszym przedstawiono …
+    Rozdział drugi to …
+    Rozdział trzeci zawiera …
+
+# ---------------------------------------------------------------------------
+# Zakończenie (conclusion)
+# ---------------------------------------------------------------------------
+zakonczenie:
+  opening_pattern: >
+    „Celem pracy było …. Zdaniem autora cel ten został zrealizowany dzięki …”
+  rules:
+    - No new information — only summarize what was already in the body
+    - Prefer 3–4 bullet conclusions collecting the main results
+    - Tie back to the stated goal and scope
+
+# ---------------------------------------------------------------------------
+# Editorial / typography (Greber §1.2) — informational
+# Prefer WIT + settings.tex for the submitted PDF.
+# ---------------------------------------------------------------------------
+editorial_greber:
+  margins_mm:
+    top: 25
+    bottom: 25
+    right: 25
+    left: 35
+  font: Times New Roman 12pt
+  line_spacing: 1.5
+  alignment: justified
+  archival_print: duplex
+  note_wit_override: >
+    WIT wymogi_edytorskie (deanery): single spacing; margins 25 mm all sides
+    + 5 mm binding; chapter 14 pt / section 13 pt / subsection 12 pt.
+    Implemented in settings.tex — do not reintroduce Greber 1.5 spacing
+    or left-35 mm unless the user/promotor asks.
+
+editorial_wit_in_force:
+  source: temp-resources/wymogi_edytorskie.docx.md
+  implemented_in: settings.tex
+  font_family: newtxtext + newtxmath  # Times clone, consistent whole document
+  body_pt: 12
+  chapter_pt: 14
+  section_pt: 13
+  subsection_pt: 12
+  caption_pt: 10
+  line_spacing: single
+  indent_cm: 0.7
+  margins_mm: { top: 25, bottom: 25, inner: 25, outer: 25, bindingoffset: 5 }
+
+# ---------------------------------------------------------------------------
+# Typography / punctuation pitfalls (Greber Table 2)
+# ---------------------------------------------------------------------------
+typography_do:
+  - Space after periods, commas, colons, semicolons — never before
+  - No spaces inside parentheses or quotation marks: (tekst), „tekst”
+  - Hyphen (dywiz) joins words without spaces: biało-czerwony
+  - En/em dash (myślnik) separates clauses with spaces: Słońce – nasza gwiazda
+  - Initials without spaces: W.E. Deming
+  - Figure/table source line: „Źródło: opracowanie własne” (spaces after colons)
+  - Numbered list with „1.” → capitalize the item; with „1)” → lowercase
+  - Bullet list of lowercase items → end items with comma or semicolon
+
+typography_dont:
+  - Empty blank lines between paragraphs of the same thought
+  - Abbreviations in chapter titles
+  - Periods after chapter titles
+
+# ---------------------------------------------------------------------------
+# Figures and tables (Greber §1.3)
+# ---------------------------------------------------------------------------
+figures_and_tables:
+  cite_before_insert: true
+  bad_cite_example: „Poniżej przedstawiono tabelę z wynikami badań”
+  good_cite_style: use numbered reference (e.g. „w tabeli 1”, „na rys. 1”)
+  naming:
+    figure_label: "Rys."   # abbreviation
+    table_label: "Tabela"  # full word
+  caption_placement:
+    figure: below
+    table: above
+  every_figure_and_table_needs:
+    - title
+    - source_line_below
+  source_examples:
+    - "Źródło: opracowanie własne"
+    - "Źródło: opracowanie własne na podstawie [2, s. 45]"
+    - "Źródło: [2]"
+  numbering: per_chapter_or_continuous  # 1.1 / 2.1 or global 1…N — pick one, stay consistent
+  font_may_be_smaller: "10pt OK if still legible"
+  landscape: rotate_counterclockwise_if_needed
+  continued_table:
+    - Repeat number + title with „cd.”
+    - Repeat column headers
+    - Repeat source line
+
+# ---------------------------------------------------------------------------
+# Literature and citations (Greber §1.4)
+# ---------------------------------------------------------------------------
+literature:
+  minimum_cited_items:
+    magisterska: 20
+    inzynierska: 15
+  excluded_from_minimum_count:
+    - internal_company_materials
+    - websites
+    - standards
+    - acts_of_law
+  where_to_cite:
+    chapter_1: primary literature review
+    chapter_2: organization/internal documents OK
+    chapter_3: no literature citations
+  in_text_style: square_brackets  # [n] or [n, s. 12]
+  patterns:
+    text: "[4, s. 256-258] before the sentence-ending period"
+    before_list: "place citation before the colon introducing the list"
+    figure_or_table_source: "Źródło: opracowanie własne na podstawie [3, s. 12]"
+  page_numbers:
+    books: prefer page range at the citation site
+    journals: pages may appear only in the bibliography entry
+  secondary_citation: "[za:] original cited in intermediary"  # see Greber example
+  bibliography:
+    placement: immediately_after_zakonczenie
+    order: alphabetical_by_author_surname
+    separate_blocks:
+      - main_literature
+      - websites  # official orgs only; always include access date DD.MM.YYYY
+      - dokumenty_pozostale  # internal docs, legal acts, standards
+  website_rules:
+    - Only official portals of known organizations (ISO, PKN, GUM, …)
+    - Never cite personal / blog-style URLs as scholarly sources
+    - Always record the access date
+
+# ---------------------------------------------------------------------------
+# Chapter 2 Greber checklist (adapt for this thesis)
+# ---------------------------------------------------------------------------
+chapter_2_greber_checklist:
+  typical_contents_for_org_thesis:
+    - basic_company_info_and_history
+    - business_scope
+    - customers_and_suppliers
+    - org_structure_and_staffing
+    - quality_management
+  put_bulky_docs_in_appendices: true
+  do_not_put_authors_research_figures_here: true  # those belong in ch. 3
+
+# ---------------------------------------------------------------------------
+# Chapter 3 author-work rules (Greber §3.2)
+# ---------------------------------------------------------------------------
+chapter_3_rules:
+  - Frequently make clear what is the author’s own contribution
+  - Even describing existing solutions must include the author’s analysis
+  - Structure from general to specific
+  - End with a short summary of the author’s reflections
+  - Demonstrate practical use of study knowledge and research craft
+
+# ---------------------------------------------------------------------------
+# Defense presentation (Greber §3.3) — optional agent guidance
+# ---------------------------------------------------------------------------
+defense_presentation:
+  duration_minutes: "5-8"
+  tips:
+    - Formal greeting addressing the committee chair
+    - Speak to the committee; glance at slides — do not read with back turned
+    - Do not lecture theory; highlight what was interesting / achieved
+    - Skip boring timelines, full product catalogs, empty “nowadays…” openers
+    - End with a few conclusions summarizing results
+    - Control gestures; project confidence (impression matters even if not graded)
+
+# ---------------------------------------------------------------------------
+# Agent checklist (run before finishing a thesis prose edit)
+# ---------------------------------------------------------------------------
+agent_checklist:
+  - [ ] Goal of the thesis stated in wstęp; structure outlined
+  - [ ] Chapters balanced; none trivial in length
+  - [ ] Numbering depth ≤ 3; titles without trailing periods/abbreviations
+  - [ ] Every figure/table cited before appearance; has title + Źródło
+  - [ ] Captions: „Rys.” / „Tabela”; sources use Greber wording
+  - [ ] ≥15 literature items for inżynierska (excluding www/norms/acts/internal)
+  - [ ] No literature citations in the results chapter (ch. 3+)
+  - [ ] Citation form [n] or [n, s. …] before period / before list colon
+  - [ ] Zakończenie restates goal + 3–4 conclusions; no new facts
+  - [ ] Typography: no space-before-punctuation; correct hyphen vs dash
+  - [ ] Fonts stay Times-family via settings.tex (no ad-hoc font switches)

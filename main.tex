@@ -75,12 +75,13 @@
 \pagenumbering{arabic}  %% NIE RUSZAJ TEGO
 
 %% TU JEST MIEJSCE NA DOŁĄCZENIE TWOICH ROZDZIAŁÓW
-\include{chapters/wstep}
-%% \include{chapters/Rodzial01}
-%% \include{chapters/Rodzial02}
-%% ...
-%% \include{chapters/RodzialXX}
-\include{chapters/info} %% Tu jest kilka przykładów
+\include{chapters/01-wprowadzenie}
+\include{chapters/02-przeglad}
+\include{chapters/03-sprzet}
+\include{chapters/04-program}
+\include{chapters/05-testy}
+\include{chapters/06-podsumowanie}
+\include{chapters/ai}
 
 %% TU WYWOŁUJEMY BIBLIOGRAFIĘ
 %% ZRÓDŁO ZOSTAŁO USTAWIONE POLECENIEM \addbibresource
@@ -89,9 +90,7 @@
 \printbibliography[title={Spis literatury}]
 %% TU ZACZYNAJĄ SIĘ ZAŁĄCZNIKI
 \appendix
-%% \include{Dodatek01}
-%% ...
-%% \include{DodatekYY}
+\include{chapters/zalaczniki}
 
 
 %% --- Spisy ---

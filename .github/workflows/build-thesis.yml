@@ -17,12 +17,22 @@ jobs:
       - name: Compile LaTeX (pdflatex + biber)
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: main.tex
+          root_file: |
+            main.tex
+            presentation.tex
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: thesis-pdf
           path: main.pdf
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload presentation artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: presentation-pdf
+          path: presentation.pdf
           if-no-files-found: error
           retention-days: 30

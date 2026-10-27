@@ -72,8 +72,8 @@
     \node[blk, right=1.4cm of mcu, yshift=1.2cm]  (epd) {e-papier 2,13''};
     \node[blk, right=1.4cm of mcu, yshift=0cm]    (btn) {przyciski};
     \node[blk, right=1.4cm of mcu, yshift=-1.2cm] (ble) {BLE $\to$ strona WWW};
-    \node[blk, below=0.5cm of mcu, xshift=-2.6cm, minimum width=2.9cm] (chg) {ładowarka MCP73831};
-    \node[blk, below=0.5cm of mcu, xshift=2.6cm,  minimum width=2.9cm] (bat) {Li-Po + USB-C};
+    \node[blk, below=1.3cm of mcu, xshift=-2.6cm, minimum width=2.9cm] (chg) {ładowarka MCP73831};
+    \node[blk, below=1.3cm of mcu, xshift=2.6cm,  minimum width=2.9cm] (bat) {Li-Po + USB-C};
     \draw[->] (dcf) -- (mcu);
     \draw[<->] (acc) -- (mcu);
     \draw[<-] (buz) -- (mcu);
